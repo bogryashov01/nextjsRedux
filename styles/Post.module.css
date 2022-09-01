@@ -1,0 +1,18 @@
+.post {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.seeAllButton {
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.seeAllButton:hover {
+  color: #fff;
+  border: 1px solid #000;
+  background-color: #000;
+}

@@ -1,0 +1,10 @@
+.breadcrumbsBlock {
+  margin: 20px;
+  padding: 10px;
+  display: inline-flex;
+  background-color: #fff;
+  color: #000;
+}
+.breadcrumbItem {
+  margin-right: 10px;
+}
