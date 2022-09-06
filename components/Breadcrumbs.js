@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import styles from '../../styles/Breadcrumbs.module.css';
+import styles from '../styles/Breadcrumbs.module.css';
 
 const Breadcrumbs = (props) => {
   const { breadcrumbs } = props;
+  console.log(breadcrumbs);
   return (
     <div className={styles.breadcrumbsBlock}>
       {breadcrumbs.map((breadcrumb, index) => {

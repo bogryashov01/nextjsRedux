@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 import { useSelector } from 'react-redux';
 import { setCurrentPost, postData } from '../../redux/slices/posts';
-import { store, wrapper } from '../../redux/store';
-import MainContainer from '../components/MainContainer';
+import { wrapper } from '../../redux/store';
+import Layout from '../../components/Layout';
 
 // styles
 import styles from '../../styles/Post.module.css';
@@ -11,7 +11,7 @@ import styles from '../../styles/Post.module.css';
 export default function Post() {
   const post = useSelector(postData.currentPost);
   return (
-    <MainContainer>
+    <Layout>
       <div className={styles.post}>
         <h2>Title: {post?.title}</h2>
         <p>Body : {post?.body}</p>
@@ -20,7 +20,7 @@ export default function Post() {
           <button className={styles.seeAllButton}>see all articles</button>
         </Link>
       </div>
-    </MainContainer>
+    </Layout>
   );
 }
 
