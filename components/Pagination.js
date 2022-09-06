@@ -15,12 +15,12 @@ function Pagination({
 
   function goToNextPage() {
     setCurrentPage((page) => page + 1);
-    router.push(`/articles?page=${currentPage}`);
+    router.push(`/articles?page=${currentPage + 1}`);
   }
 
   function goToPreviousPage() {
     setCurrentPage((page) => page - 1);
-    router.push(`/articles?page=${currentPage}`);
+    router.push(`/articles?page=${currentPage - 1}`);
   }
 
   const getPaginatedData = () => {
@@ -43,7 +43,7 @@ function Pagination({
         {getPaginatedData()?.map((d, idx) => {
           return (
             <div key={idx}>
-              <RenderComponent data={d} />
+              <RenderComponent data={d} router={router.query.page} />
             </div>
           );
         })}

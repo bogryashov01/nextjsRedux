@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from '../styles/Posts.module.css';
 function Post(props) {
-  const { data } = props;
+  const { data, query } = props;
   return (
     <>
       <div>

@@ -7,18 +7,17 @@ import Breadcrumbs from './Breadcrumbs';
 const Layout = ({ children }) => {
   const router = useRouter();
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-
-  console.log(router);
-
   useEffect(() => {
     if (router) {
-      const pathArray = [];
       const linkPath = router.asPath.split('/');
+      console.log(linkPath);
       linkPath.shift();
       linkPath.forEach((path, i) => {
-        pathArray.push({ breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') });
+        setBreadcrumbs((prevState) => [
+          ...prevState,
+          { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') },
+        ]);
       });
-      setBreadcrumbs((prevState) => pathArray);
     }
   }, [router]);
   console.log(breadcrumbs);

@@ -16,11 +16,6 @@ export default function Posts() {
   const [currentPage, setCurrentPage] = useState(Number(query.page));
   const posts = useSelector(postData.postsData);
 
-  useEffect(() => {
-    if (currentPage !== query.page) {
-      router.push(`/articles?page=${currentPage}`);
-    }
-  }, [currentPage, query.page]);
   return (
     <Layout>
       {posts?.length > 0 ? (
