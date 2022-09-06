@@ -7,12 +7,20 @@ import { store, wrapper } from '../../redux/store';
 import Layout from '../../components/Layout';
 import Pagination from '../../components/Pagination';
 import Post from '../../components/Post';
-
-// styles
-import styles from '../../styles/Posts.module.css';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export default function Posts() {
+  const router = useRouter();
+  const { query } = router;
+  const [currentPage, setCurrentPage] = useState(Number(query.page));
   const posts = useSelector(postData.postsData);
+
+  useEffect(() => {
+    if (currentPage !== query.page) {
+      router.push(`/articles?page=${currentPage}`);
+    }
+  }, [currentPage, query.page]);
   return (
     <Layout>
       {posts?.length > 0 ? (
@@ -23,6 +31,9 @@ export default function Posts() {
             title="Posts"
             pageLimit={5}
             dataLimit={10}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            router={router}
           />
         </>
       ) : (
@@ -34,6 +45,7 @@ export default function Posts() {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
   try {
+    console.log(ctx.req.headers, 'conntext');
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
 
     const posts = await response.json();

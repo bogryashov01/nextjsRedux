@@ -9,7 +9,9 @@ const Breadcrumbs = (props) => {
         return (
           <nav key={index}>
             <Link href={breadcrumb?.href}>
-              <a className={styles.breadcrumbItem}>{breadcrumb?.breadcrumb}</a>
+              <a className={styles.breadcrumbItem}>
+                {breadcrumb?.href == '/' ? 'home' : breadcrumb?.breadcrumb}
+              </a>
             </Link>
           </nav>
         );

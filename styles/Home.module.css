@@ -10,3 +10,15 @@
 .navlink {
   margin-right: 20px;
 }
+
+.linkBlock {
+  text-align: center;
+}
+
+.link {
+  border: 1px solid #fff;
+  margin-top: 25px;
+  margin-left: 25px;
+  padding: 10px 25px;
+  border-radius: 25px;
+}

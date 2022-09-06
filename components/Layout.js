@@ -8,6 +8,8 @@ const Layout = ({ children }) => {
   const router = useRouter();
   const [breadcrumbs, setBreadcrumbs] = useState([]);
 
+  console.log(router);
+
   useEffect(() => {
     if (router) {
       const pathArray = [];
@@ -16,7 +18,7 @@ const Layout = ({ children }) => {
       linkPath.forEach((path, i) => {
         pathArray.push({ breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') });
       });
-      setBreadcrumbs(pathArray);
+      setBreadcrumbs((prevState) => pathArray);
     }
   }, [router]);
   console.log(breadcrumbs);
@@ -24,12 +26,16 @@ const Layout = ({ children }) => {
   return (
     <>
       <nav className={styles.navbar}>
-        <Link href={'/home'}>
-          <a className={styles.navlink}>Home</a>
-        </Link>
-        <Link href={'/articles'}>
-          <a className={styles.navlink}>List of Posts</a>
-        </Link>
+        <button
+          className={styles.navlink}
+          onClick={() => router.push('/', undefined, { shallow: true })}>
+          Home
+        </button>
+        <button
+          className={styles.navlink}
+          onClick={() => router.push('/articles?page=1', undefined, { shallow: true })}>
+          Articles
+        </button>
       </nav>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div>{children}</div>

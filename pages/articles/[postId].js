@@ -16,7 +16,7 @@ export default function Post() {
         <h2>Title: {post?.title}</h2>
         <p>Body : {post?.body}</p>
 
-        <Link href="/articles">
+        <Link href="/articles?page=1">
           <button className={styles.seeAllButton}>see all articles</button>
         </Link>
       </div>
