@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 export default function Posts() {
   const router = useRouter();
   const { query } = router;
-  const [currentPage, setCurrentPage] = useState(Number(query.page));
+  const [currentPage, setCurrentPage] = useState(Number(query.page) || 1);
   const posts = useSelector(postData.postsData);
 
   return (
@@ -40,7 +40,6 @@ export default function Posts() {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
   try {
-    console.log(ctx.req.headers, 'conntext');
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
 
     const posts = await response.json();

@@ -5,7 +5,7 @@ const Breadcrumbs = (props) => {
   const { breadcrumbs } = props;
   return (
     <div className={styles.breadcrumbsBlock}>
-      {breadcrumbs.slice(-6).map((breadcrumb, index) => {
+      {breadcrumbs?.slice(-6).map((breadcrumb, index) => {
         return (
           <nav key={index}>
             <Link href={breadcrumb?.href}>

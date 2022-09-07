@@ -6,35 +6,36 @@ import Breadcrumbs from './Breadcrumbs';
 
 const Layout = ({ children }) => {
   const router = useRouter();
+  const { query, pathname } = router;
+  const breadcrumbsPath = query?.historypath?.split(',');
   const [breadcrumbs, setBreadcrumbs] = useState([]);
+  const bredcrumbsArray = [];
+
   useEffect(() => {
     if (router) {
-      const linkPath = router.asPath.split('/');
-      console.log(linkPath);
-      linkPath.shift();
-      linkPath.forEach((path, i) => {
-        setBreadcrumbs((prevState) => [
-          ...prevState,
-          { breadcrumb: path, href: '/' + linkPath.slice(0, i + 1).join('/') },
-        ]);
+      breadcrumbsPath?.forEach((path, i) => {
+        console.log({ breadcrumb: path, href: path });
+        bredcrumbsArray.push({ breadcrumb: path, href: path });
       });
+      setBreadcrumbs(bredcrumbsArray);
     }
-  }, [router]);
-  console.log(breadcrumbs);
+  }, [pathname, router]);
 
   return (
     <>
       <nav className={styles.navbar}>
-        <button
-          className={styles.navlink}
-          onClick={() => router.push('/', undefined, { shallow: true })}>
-          Home
-        </button>
-        <button
-          className={styles.navlink}
-          onClick={() => router.push('/articles?page=1', undefined, { shallow: true })}>
-          Articles
-        </button>
+        <Link
+          href={`/?historypath=${
+            query.historypath ? query?.historypath?.split(',')?.concat(router.pathname) : '/'
+          }`}>
+          <button className={styles.navlink}>Home</button>
+        </Link>
+        <Link
+          href={`articles?page=1&historypath=${
+            query.historypath ? query?.historypath?.split(',')?.concat(router.pathname) : ''
+          }`}>
+          <button className={styles.navlink}>Articles</button>
+        </Link>
       </nav>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div>{children}</div>
