@@ -15,12 +15,20 @@ function Pagination({
 
   function goToNextPage() {
     setCurrentPage((page) => page + 1);
-    router.push(`/articles?page=${currentPage + 1}`);
+    router.push(
+      `/articles?page=${currentPage + 1}&historypath=${router.query?.historypath
+        ?.split(',')
+        ?.concat(router.pathname)}`,
+    );
   }
 
   function goToPreviousPage() {
     setCurrentPage((page) => page - 1);
-    router.push(`/articles?page=${currentPage - 1}`);
+    router.push(
+      `/articles?page=${currentPage - 1}&historypath=${router.query?.historypath
+        ?.split(',')
+        ?.concat(router.pathname)}`,
+    );
   }
 
   const getPaginatedData = () => {
